@@ -3,6 +3,7 @@
         _TranslucentGain("Translucent Gain", Range(0,1)) = 0.5
 
         _GroundTexture ("Ground Texture", 2D) = "white" {}
+		_GroundColor ("Ground Color for texture", Color) = (1, 1, 1)
 
         _DisplacementTexture("Displacement Texture", 2D) = "grey" {}
         _DisplacementFactor("Displacement Factor", Float) = 2
@@ -96,6 +97,7 @@
 
     sampler2D _DisplacementTexture;
     sampler2D _GroundTexture;
+	float4 _GroundColor;
 
     float _DisplacementFactor;
 
@@ -263,7 +265,7 @@
                 float3 ambient = ShadeSH9(float4(normal, 1));
                 float4 lightIntensity = NdotL * _LightColor0 + float4(ambient, 1) + 0.01;
 
-                float4 col = tex2D(_GroundTexture, i.uv.zw);
+                float4 col = tex2D(_GroundTexture, i.uv.zw) * _GroundColor;
                 col *= lightIntensity;
 
                 float3 ambientLight = UNITY_LIGHTMODEL_AMBIENT.rgb * col;
@@ -307,7 +309,7 @@
             fixed4 frag(geometryOutput i, fixed facing: VFACE) : COLOR
             {
                 UNITY_LIGHT_ATTENUATION(attenuation, i, i.world.xyz);
-                float3 diffuseReflection = attenuation * _LightColor0.rgb * tex2D(_GroundTexture, i.uv.zw);
+                float3 diffuseReflection = attenuation * _LightColor0.rgb * tex2D(_GroundTexture, i.uv.zw) * _GroundColor;
 
                 return float4(diffuseReflection, 1.0);
             }
