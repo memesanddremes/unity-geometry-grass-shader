@@ -1,3 +1,5 @@
+This fork simply adds a the ability multiply the texture by a color 
+
 # Unity Geometry Grass Shader
 A Geometry shader written for Unity's build-in Render Pipeline
 
