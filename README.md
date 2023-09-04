@@ -1,4 +1,5 @@
-This fork simply adds a the ability multiply the texture by a color 
+# Fork
+The fork simply adds a color picker that lets you change the grass color. I would suggest using a black-and-white texture for the grass.
 
 # Unity Geometry Grass Shader
 A Geometry shader written for Unity's build-in Render Pipeline
